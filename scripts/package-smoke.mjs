@@ -7,6 +7,7 @@ const root = resolve(import.meta.dirname, "..");
 const artifacts = join(root, ".artifacts");
 const pnpmCommand = process.platform === "win32" ? "pnpm.cmd" : "pnpm";
 const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";
+const windowsShell = process.platform === "win32";
 await rm(artifacts, { recursive: true, force: true });
 await mkdir(artifacts, { recursive: true });
 
@@ -14,6 +15,7 @@ const packed = spawnSync(pnpmCommand, ["pack", "--pack-destination", artifacts],
   cwd: root,
   encoding: "utf8",
   stdio: "pipe",
+  shell: windowsShell,
 });
 if (packed.status !== 0) throw new Error(packed.error?.message || packed.stderr || packed.stdout);
 const tarball = (await readdir(artifacts)).find((name) => name.endsWith(".tgz"));
@@ -37,6 +39,7 @@ try {
     cwd: consumer,
     encoding: "utf8",
     stdio: "pipe",
+    shell: windowsShell,
   });
   if (installed.status !== 0) throw new Error(installed.error?.message || installed.stderr || installed.stdout);
   await writeFile(join(consumer, "smoke.mjs"), `
