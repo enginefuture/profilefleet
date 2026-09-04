@@ -3,6 +3,11 @@
 All notable changes to ProfileFleet are documented here. The project follows
 Semantic Versioning while the public API is in active `0.x` development.
 
+## Unreleased
+
+- Keep Chromium's process sandbox enabled on macOS and Windows while retaining
+  CloakBrowser's container-compatible Linux defaults.
+
 ## 0.1.0 — 2026-09-04
 
 - Add persistent browser profiles with fixed identity fields.

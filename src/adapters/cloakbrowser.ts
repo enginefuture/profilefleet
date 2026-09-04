@@ -55,6 +55,24 @@ async function endpointAlive(endpoint: string): Promise<boolean> {
   }
 }
 
+export function cloakBrowserPlatformOptions(platform: NodeJS.Platform = process.platform): {
+  stealthArgs: boolean;
+  args: string[];
+} {
+  // CloakBrowser's wrapper adds --no-sandbox on every platform. Desktop macOS
+  // and Windows do not require it, and keeping Chromium's sandbox enabled is a
+  // safer, more browser-like default. Linux retains the wrapper defaults for
+  // container compatibility; --test-type suppresses Chromium's warning banner.
+  if (platform === "linux") return { stealthArgs: true, args: ["--test-type"] };
+  return {
+    stealthArgs: false,
+    args: [
+      "--test-type",
+      `--fingerprint-platform=${platform === "darwin" ? "macos" : "windows"}`,
+    ],
+  };
+}
+
 export class CloakBrowserAdapter implements BrowserEngineAdapter {
   readonly id = "cloakbrowser";
 
@@ -101,12 +119,14 @@ export class CloakBrowserAdapter implements BrowserEngineAdapter {
 
   async launch(input: EngineLaunchInput): Promise<EngineSessionHandle> {
     const { launchPersistentContext } = await import("cloakbrowser");
+    const platform = cloakBrowserPlatformOptions();
     const args = [
       `--remote-debugging-port=${input.cdpPort}`,
       "--remote-debugging-address=127.0.0.1",
       `--fingerprint=${input.profile.fingerprintSeed}`,
       "--disable-session-crashed-bubble",
       "--no-first-run",
+      ...platform.args,
       ...(input.proxyUrl ? [] : ["--no-proxy-server"]),
     ];
     const context = await launchPersistentContext({
@@ -114,6 +134,7 @@ export class CloakBrowserAdapter implements BrowserEngineAdapter {
       headless: input.profile.headless,
       locale: input.profile.locale,
       timezone: input.profile.timezone,
+      stealthArgs: platform.stealthArgs,
       args,
       ...(input.proxyUrl ? { proxy: input.proxyUrl } : {}),
       ...(process.env.CLOAKBROWSER_LICENSE_KEY
