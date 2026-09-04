@@ -1,0 +1,25 @@
+name: Feature request
+description: Propose a general lifecycle or adapter capability
+title: "[feature] "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Integration problem
+      description: Describe the authorized workflow this would enable.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed public API or behavior
+    validations:
+      required: true
+  - type: checkboxes
+    id: policy
+    attributes:
+      label: Acceptable use
+      options:
+        - label: This request does not add CAPTCHA bypass, credential attacks, fake engagement, or unauthorized automation.
+          required: true

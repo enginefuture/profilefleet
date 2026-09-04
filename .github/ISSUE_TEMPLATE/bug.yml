@@ -1,0 +1,35 @@
+name: Bug report
+description: Report a reproducible ProfileFleet problem
+title: "[bug] "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Do not include tokens, proxy URLs, cookies, credentials, or profile data.
+  - type: input
+    id: version
+    attributes:
+      label: ProfileFleet version
+      placeholder: 0.1.0
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options: [macOS, Linux, Windows]
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Include exact steps and redacted logs.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true

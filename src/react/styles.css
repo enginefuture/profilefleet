@@ -1,0 +1,53 @@
+:root {
+  --pf-ink: #15221c;
+  --pf-muted: #68756e;
+  --pf-line: #dbe2dd;
+  --pf-surface: #ffffff;
+  --pf-soft: #f3f6f3;
+  --pf-accent: #246b47;
+  --pf-accent-soft: #dff3e7;
+  --pf-danger: #a13a32;
+  --pf-radius: 18px;
+}
+
+.pf-card { background: var(--pf-surface); border: 1px solid var(--pf-line); border-radius: var(--pf-radius); padding: 22px; box-shadow: 0 12px 40px rgba(20, 45, 32, .06); }
+.pf-section-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
+.pf-section-heading h2 { color: var(--pf-ink); font: 600 20px/1.25 ui-sans-serif, system-ui; margin: 3px 0 0; }
+.pf-eyebrow { color: var(--pf-muted); font: 700 11px/1 ui-monospace, monospace; letter-spacing: .13em; text-transform: uppercase; }
+.pf-metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.pf-metric { background: var(--pf-soft); border-radius: 12px; display: grid; gap: 8px; padding: 14px; }
+.pf-metric span, .pf-card small, .pf-table small { color: var(--pf-muted); font: 500 12px/1.4 ui-sans-serif, system-ui; }
+.pf-metric strong { color: var(--pf-ink); font: 650 26px/1 ui-sans-serif, system-ui; }
+.pf-status { background: #edf0ee; border-radius: 999px; color: var(--pf-muted); display: inline-flex; font: 700 11px/1 ui-sans-serif, system-ui; padding: 7px 10px; text-transform: capitalize; white-space: nowrap; }
+.pf-status--ok { background: var(--pf-accent-soft); color: var(--pf-accent); }
+.pf-table-wrap { background: var(--pf-surface); border: 1px solid var(--pf-line); border-radius: var(--pf-radius); overflow: auto; }
+.pf-table { border-collapse: collapse; color: var(--pf-ink); min-width: 820px; width: 100%; }
+.pf-table th { color: var(--pf-muted); font: 700 11px/1 ui-sans-serif, system-ui; letter-spacing: .08em; padding: 15px 18px; text-align: left; text-transform: uppercase; }
+.pf-table td { border-top: 1px solid var(--pf-line); font: 500 14px/1.4 ui-sans-serif, system-ui; padding: 16px 18px; vertical-align: middle; }
+.pf-table td:first-child, .pf-table td:nth-child(2) { display: grid; gap: 3px; }
+.pf-table code { font: 500 12px/1.4 ui-monospace, monospace; }
+.pf-actions { display: flex; justify-content: flex-end; gap: 8px; }
+.pf-button { appearance: none; background: var(--pf-accent); border: 1px solid var(--pf-accent); border-radius: 10px; color: white; cursor: pointer; font: 700 12px/1 ui-sans-serif, system-ui; padding: 10px 13px; }
+.pf-button:hover { filter: brightness(.94); }
+.pf-button:focus-visible, .pf-form input:focus-visible { outline: 3px solid rgba(36, 107, 71, .25); outline-offset: 2px; }
+.pf-button:disabled { cursor: not-allowed; opacity: .45; }
+.pf-button--quiet { background: white; color: var(--pf-accent); }
+.pf-button--danger { background: white; border-color: #e6c7c4; color: var(--pf-danger); }
+.pf-form { display: grid; gap: 14px; }
+.pf-form label { color: var(--pf-muted); display: grid; font: 700 12px/1.3 ui-sans-serif, system-ui; gap: 7px; }
+.pf-form input { background: white; border: 1px solid var(--pf-line); border-radius: 10px; color: var(--pf-ink); font: 500 14px/1.2 ui-sans-serif, system-ui; padding: 11px 12px; }
+.pf-form-grid { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+.pf-form .pf-check { align-items: center; display: flex; font-weight: 600; }
+.pf-form .pf-check input { margin: 0; }
+.pf-alert, .pf-empty { border: 1px dashed var(--pf-line); border-radius: 14px; color: var(--pf-muted); font: 500 14px/1.5 ui-sans-serif, system-ui; padding: 22px; text-align: center; }
+.pf-alert { background: #fff6f4; border-color: #e6c7c4; color: var(--pf-danger); }
+.pf-session-list { display: grid; gap: 0; list-style: none; margin: 0; padding: 0; }
+.pf-session-list li { align-items: center; border-top: 1px solid var(--pf-line); display: grid; gap: 16px; grid-template-columns: 1fr auto auto; padding: 14px 0; }
+.pf-session-list li:first-child { border-top: 0; }
+.pf-session-list li > div { display: grid; gap: 4px; }
+.pf-sr-only { height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+
+@media (max-width: 720px) {
+  .pf-metrics { grid-template-columns: 1fr 1fr; }
+  .pf-form-grid { grid-template-columns: 1fr; }
+}

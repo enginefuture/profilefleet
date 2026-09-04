@@ -1,0 +1,123 @@
+{
+  "name": "profilefleet",
+  "version": "0.1.0",
+  "description": "Self-hosted TypeScript orchestration for persistent fingerprint-browser profiles, leases, and React tooling",
+  "type": "module",
+  "license": "Apache-2.0",
+  "author": "Engine Future",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/enginefuture/profilefleet.git"
+  },
+  "homepage": "https://github.com/enginefuture/profilefleet#readme",
+  "bugs": "https://github.com/enginefuture/profilefleet/issues",
+  "keywords": [
+    "browser-automation",
+    "browser-cluster",
+    "fingerprint-browser",
+    "playwright",
+    "react",
+    "self-hosted",
+    "typescript"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "packageManager": "pnpm@9.15.3",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "dist",
+    "README.md",
+    "README.zh-CN.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "NOTICE",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "bin": {
+    "profilefleet": "./dist/cli/index.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/client/index.d.ts",
+      "import": "./dist/client/index.js"
+    },
+    "./client": {
+      "types": "./dist/client/index.d.ts",
+      "import": "./dist/client/index.js"
+    },
+    "./server": {
+      "types": "./dist/server/index.d.ts",
+      "import": "./dist/server/index.js"
+    },
+    "./react": {
+      "types": "./dist/react/index.d.ts",
+      "import": "./dist/react/index.js"
+    },
+    "./adapters/cloakbrowser": {
+      "types": "./dist/adapters/cloakbrowser.d.ts",
+      "import": "./dist/adapters/cloakbrowser.js"
+    },
+    "./playwright": {
+      "types": "./dist/playwright/index.d.ts",
+      "import": "./dist/playwright/index.js"
+    },
+    "./testing": {
+      "types": "./dist/testing/index.d.ts",
+      "import": "./dist/testing/index.js"
+    },
+    "./styles.css": "./dist/react/index.css"
+  },
+  "scripts": {
+    "dev": "tsx src/cli/index.ts start --ui",
+    "dev:console": "vite --config apps/console/vite.config.ts",
+    "build": "pnpm run build:lib && pnpm run build:console",
+    "build:lib": "tsup",
+    "build:console": "vite build --config apps/console/vite.config.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:real": "PROFILEFLEET_REAL_ENGINE=1 node scripts/real-engine-smoke.mjs",
+    "test:watch": "vitest",
+    "check": "pnpm run typecheck && pnpm run test && pnpm run build",
+    "pack:check": "node scripts/package-smoke.mjs",
+    "prepack": "pnpm run build"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.19.5",
+    "hono": "^4.9.6",
+    "zod": "^4.1.11"
+  },
+  "optionalDependencies": {
+    "cloakbrowser": "^0.5.10",
+    "playwright-core": "^1.62.1"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@testing-library/react": "^16.3.0",
+    "@types/node": "^24.3.1",
+    "@types/react": "^19.1.12",
+    "@types/react-dom": "^19.1.9",
+    "@vitejs/plugin-react": "^5.0.2",
+    "happy-dom": "^18.0.1",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "tsup": "^8.5.0",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.4",
+    "vitest": "^3.2.4"
+  }
+}
