@@ -8,3 +8,6 @@ coverage/
 .env
 .env.*
 !.env.example
+
+# Private integration harnesses, browser profiles, cookies, and screenshots.
+.local-tests/
