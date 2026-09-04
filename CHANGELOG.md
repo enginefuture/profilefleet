@@ -16,3 +16,5 @@ Semantic Versioning while the public API is in active `0.x` development.
 - Add CloakBrowser and fake engine adapters.
 - Add cross-platform CI, package consumer smoke tests, bilingual documentation,
   security guidance, and acceptable-use policy.
+- Make the package consumer smoke runner portable across Unix and Windows
+  executable naming conventions.
